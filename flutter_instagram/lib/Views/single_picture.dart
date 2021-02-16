@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../Classes/picture.dart';
 
 class SinglePicture extends StatelessWidget {
-  const SinglePicture({Key key, @required String userID}) : super(key: key);
+  const SinglePicture({Key key  = const Key("any_key"), required String userID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
