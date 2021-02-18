@@ -41,15 +41,12 @@ class UserSearchBar extends StatelessWidget {
           onSearch: _getALlPosts,
           searchBarController: _searchBarController,
           placeHolder: Text("placeholder"),
-          cancellationWidget: Text("Cancel", style:TextStyle(color: Colors.white)),
-          emptyWidget: Text("empty", style:TextStyle(color: Colors.white)),
+          cancellationWidget:
+              Text("Cancel", style: TextStyle(color: Colors.white)),
+          emptyWidget: Text("empty", style: TextStyle(color: Colors.white)),
           header: Row(
-            children: <Widget>[
-            ],
+            children: <Widget>[],
           ),
-          onCancelled: () {
-            print("Cancelled triggered");
-          },
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           crossAxisCount: 2,
@@ -61,7 +58,8 @@ class UserSearchBar extends StatelessWidget {
                 isThreeLine: true,
                 subtitle: Text(post.body),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Detail()));
                 },
               ),
             );
@@ -83,7 +81,10 @@ class Detail extends StatelessWidget {
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            Text("Detail", style: TextStyle(color: Colors.white),),
+            Text(
+              "Detail",
+              style: TextStyle(color: Colors.white),
+            ),
           ],
         ),
       ),
