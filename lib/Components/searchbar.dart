@@ -14,6 +14,7 @@ class UserSearchBar extends StatelessWidget {
   final SearchBarController<Post> _searchBarController = SearchBarController();
 
   Future<List<Post>> _getALlPosts(String text) async {
+    await Future.delayed(Duration(seconds: text.length == 4 ? 5 : 1));
     if (text.length == 5) throw Error();
     if (text.length == 6) return [];
     List<Post> posts = [];
