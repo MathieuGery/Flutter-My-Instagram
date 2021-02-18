@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/scaled_tile.dart';
-import 'dart:math';
 
 class Post {
   final String title;
@@ -14,28 +13,58 @@ class UserSearchBar extends StatelessWidget {
   @override
   final SearchBarController<Post> _searchBarController = SearchBarController();
 
+  Future<List<Post>> _getALlPosts(String text) async {
+    if (text.length == 5) throw Error();
+    if (text.length == 6) return [];
+    List<Post> posts = [];
+
+    for (int i = 0; i < 10; i++) {
+      posts.add(Post("$text $i", "Hello guys !"));
+    }
+    return posts;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SearchBar<Post>(
           textStyle: TextStyle(color: Colors.white),
-          iconActiveColor: Colors.white,
+          icon: Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
           searchBarPadding: EdgeInsets.symmetric(horizontal: 10),
           headerPadding: EdgeInsets.symmetric(horizontal: 10),
           listPadding: EdgeInsets.symmetric(horizontal: 10),
+          onSearch: _getALlPosts,
           searchBarController: _searchBarController,
           placeHolder: Text("placeholder"),
+          cancellationWidget: Text("Cancel", style:TextStyle(color: Colors.white)),
           emptyWidget: Text("empty", style:TextStyle(color: Colors.white)),
-          indexedScaledTileBuilder: (int index) => ScaledTile.count(1, index.isEven ? 2 : 1),
           header: Row(
             children: <Widget>[
             ],
           ),
+          onCancelled: () {
+            print("Cancelled triggered");
+          },
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           crossAxisCount: 2,
-
+          onItemFound: (Post post, int index) {
+            return Container(
+              color: Colors.lightBlue,
+              child: ListTile(
+                title: Text(post.title),
+                isThreeLine: true,
+                subtitle: Text(post.body),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
+                },
+              ),
+            );
+          },
         ),
       ),
     );
@@ -53,7 +82,7 @@ class Detail extends StatelessWidget {
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            Text("Detail"),
+            Text("Detail", style: TextStyle(color: Colors.white),),
           ],
         ),
       ),
