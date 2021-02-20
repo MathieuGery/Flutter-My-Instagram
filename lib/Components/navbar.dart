@@ -26,7 +26,7 @@ class NavBar extends StatelessWidget {
           label: 'Search',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.photo),
+          icon: Icon(Icons.camera),
           label: 'Photo',
         ),
         BottomNavigationBarItem(
