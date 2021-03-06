@@ -7,7 +7,7 @@ import 'package:flutter_instagram/Classes/user.dart';
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<User>(context);
+    var user = Provider.of<UserData>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
 
