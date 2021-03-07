@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter_instagram/Views/single_picture.dart';
 import 'package:flutter_instagram/Classes/user.dart';
+import 'package:flutter_instagram/Requests/picture_interactions.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -10,21 +12,9 @@ class Profile extends StatelessWidget {
     var user = Provider.of<UserData>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
+    String uid = 'ScOkGwRYKxuoK8Pfoijf';
 
-    List pictures = [
-      NetworkImage(
-        'https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859',
-      ),
-      NetworkImage(
-        'https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859',
-      ),
-      NetworkImage(
-        'https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859',
-      ),
-      NetworkImage(
-        'https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859',
-      ),
-    ];
+    Future<List<String>> pictures = PictureInteractions().getUserPictures(uid);
 
     onPictureTap() async {
       await Navigator.push(
@@ -127,23 +117,35 @@ class Profile extends StatelessWidget {
             ),
           ),
           Expanded(
+            flex: 5,
             child: Container(
-              child: GridView.count(
-                physics: BouncingScrollPhysics(),
-                crossAxisCount: 3,
-                crossAxisSpacing: 1,
-                mainAxisSpacing: 1,
-                children: List.generate(pictures.length, (index) {
-                  return GestureDetector(
-                    onTap: onPictureTap,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth, image: pictures[index])),
-                    ),
-                  );
-                }),
-              ),
+              child: FutureBuilder<List<String>>(
+                  future: PictureInteractions().getUserPictures(uid),
+                  builder: (context, AsyncSnapshot<List<String>> snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.count(
+                        physics: BouncingScrollPhysics(),
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 1,
+                        mainAxisSpacing: 1,
+                        children: List.generate(snapshot.data!.length, (index) {
+                          return GestureDetector(
+                            onTap: onPictureTap,
+                            child: Container(
+                              child: FadeInImage.memoryNetwork(
+                                  fit: BoxFit.fitWidth,
+                                  placeholder: kTransparentImage,
+                                  image: snapshot.data![index]),
+                            ),
+                          );
+                        }),
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
             ),
           ),
         ],
