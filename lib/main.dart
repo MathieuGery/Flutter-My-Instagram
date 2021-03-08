@@ -1,22 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'Requests/authentication_services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'Views/homepage.dart';
 
 import 'Classes/pageContent.dart';
 import 'Classes/user.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<User>.value(value: User()),
+        Provider<AuthenticationService>(
+            create: (_) => AuthenticationService(FirebaseAuth.instance)),
+        StreamProvider(
+            initialData: null,
+            create: (context) =>
+                context.read<AuthenticationService>().authStateChanges),
+        ChangeNotifierProvider<UserData>.value(value: UserData()),
         ChangeNotifierProvider<PageContent>.value(value: PageContent())
       ],
       child: MaterialApp(
         title: 'Flutter Instagram',
         theme: new ThemeData(canvasColor: Colors.black),
-        home: Homepage(),
+        home: AuthenticationWrapper(),
       ),
     ),
   );
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  const AuthenticationWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+    if (firebaseUser != null) {
+      return Homepage();
+    } else {
+      return Homepage();
+    }
+  }
 }

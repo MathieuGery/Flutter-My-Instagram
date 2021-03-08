@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class User with ChangeNotifier {
+class UserData with ChangeNotifier {
   String _name = 'Romain Floriani';
   String _bio =
       "Salut a tous les amis c'est David Lafarge Pokemon opening adaiofa aofafna angagiapagn oagnaogangoa agoaonga";
