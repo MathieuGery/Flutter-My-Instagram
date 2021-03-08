@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../Components/inputField.dart';
 
-import '../Views/register.dart';
+import '../Views/login.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Scaffold(body: LoginForm());
+    return Scaffold(body: RegisterForm());
   }
 }
 
-class LoginForm extends StatefulWidget {
+class RegisterForm extends StatefulWidget {
   @override
-  LoginFormState createState() {
-    return LoginFormState();
+  RegisterFormState createState() {
+    return RegisterFormState();
   }
 }
 
-class LoginFormState extends State<LoginForm> {
+class RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -30,34 +30,36 @@ class LoginFormState extends State<LoginForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Spacer(flex: 2),
+            InputField('name', Icons.badge),
+            SizedBox(height: 25.0),
+            InputField('username', Icons.account_box),
+            SizedBox(height: 25.0),
             InputField('email', Icons.email),
-            SizedBox(
-              height: 25.0,
-            ),
+            SizedBox(height: 25.0),
             InputField('password', Icons.lock),
-            SizedBox(
-              height: 25.0,
-            ),
+            SizedBox(height: 25.0),
+            InputField('password', Icons.lock),
+            SizedBox(height: 25.0),
+            InputField('description', Icons.description),
+            SizedBox(height: 25.0),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    debugPrint('logging in...');
+                    debugPrint('Registering...');
                   }
                 },
-                child: Text('Log in'),
+                child: Text('Sign up'),
               ),
             ),
-            Spacer(flex: 2),
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don\'t have an account?',
+                    'Already have an account?',
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
@@ -65,16 +67,15 @@ class LoginFormState extends State<LoginForm> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterPage(),
+                          builder: (context) => LoginPage(),
                         ),
                       );
                     },
-                    child: Text('Sign up.'),
+                    child: Text('Sign in.'),
                   ),
                 ],
               ),
             ),
-            Spacer()
           ],
         ),
       ),
