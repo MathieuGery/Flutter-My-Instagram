@@ -18,6 +18,7 @@ Future<void> main() async {
         Provider<AuthenticationService>(
             create: (_) => AuthenticationService(FirebaseAuth.instance)),
         StreamProvider(
+            initialData: null,
             create: (context) =>
                 context.read<AuthenticationService>().authStateChanges),
         ChangeNotifierProvider<UserData>.value(value: UserData()),

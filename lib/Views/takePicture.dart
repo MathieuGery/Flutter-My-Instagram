@@ -6,7 +6,7 @@ class TakePicture extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          'Take Picture',
+          'Ttest',
           style: TextStyle(color: Colors.white),
         ),
       ),
