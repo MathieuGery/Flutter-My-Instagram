@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_instagram/Requests/authentication_services.dart';
 
 import '../Components/inputField.dart';
 
 import '../Views/register.dart';
+
+class Model {
+  String email;
+  String password;
+
+  Model({this.email = "", this.password = ""});
+}
 
 class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -19,6 +28,7 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  Model model = Model();
 
   @override
   Widget build(BuildContext context) {
@@ -31,35 +41,44 @@ class LoginFormState extends State<LoginForm> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Spacer(flex: 2),
-            InputField('email', Icons.email),
-            SizedBox(
-              height: 25.0,
+            InputField(
+              type: 'email',
+              icon: Icons.email,
+              onSaved: (value) {
+                model.email = value;
+              },
             ),
-            InputField('password', Icons.lock),
-            SizedBox(
-              height: 25.0,
+            SizedBox(height: 25.0),
+            InputField(
+              type: 'password',
+              icon: Icons.lock,
+              onSaved: (value) {
+                model.password = value;
+              },
             ),
+            SizedBox(height: 25.0),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    debugPrint('logging in...');
+                    _formKey.currentState!.save();
+                    context
+                        .read<AuthenticationService>()
+                        .logIn(model.email, model.password);
                   }
                 },
                 child: Text('Log in'),
               ),
             ),
-            Spacer(flex: 2),
+            Spacer(),
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Don\'t have an account?',
-                    style: TextStyle(color: Colors.grey),
-                  ),
+                  Text('Don\'t have an account?',
+                      style: TextStyle(color: Colors.grey)),
                   TextButton(
                     onPressed: () {
                       Navigator.push(

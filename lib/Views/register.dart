@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_instagram/Requests/authentication_services.dart';
 
 import '../Components/inputField.dart';
 
 import '../Views/login.dart';
+
+class Model {
+  String name;
+  String username;
+  String email;
+  String password;
+  String biography;
+
+  Model(
+      {this.name = "",
+      this.username = "",
+      this.email = "",
+      this.password = "",
+      this.biography = ""});
+}
 
 class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -19,6 +36,7 @@ class RegisterForm extends StatefulWidget {
 
 class RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
+  Model model = Model();
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +44,62 @@ class RegisterFormState extends State<RegisterForm> {
       key: _formKey,
       child: Padding(
         padding: EdgeInsets.all(25.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
           children: <Widget>[
-            InputField('name', Icons.badge),
+            InputField(
+              type: 'name',
+              icon: Icons.badge,
+              onSaved: (value) {
+                model.name = value;
+              },
+            ),
             SizedBox(height: 25.0),
-            InputField('username', Icons.account_box),
+            InputField(
+              type: 'username',
+              icon: Icons.account_box,
+              onSaved: (value) {
+                model.username = value;
+              },
+            ),
             SizedBox(height: 25.0),
-            InputField('email', Icons.email),
+            InputField(
+              type: 'email',
+              icon: Icons.email,
+              onSaved: (value) {
+                model.email = value;
+              },
+            ),
             SizedBox(height: 25.0),
-            InputField('password', Icons.lock),
+            InputField(
+              type: 'password',
+              icon: Icons.lock,
+              onSaved: (value) {
+                model.password = value;
+              },
+            ),
             SizedBox(height: 25.0),
-            InputField('password', Icons.lock),
-            SizedBox(height: 25.0),
-            InputField('description', Icons.description),
+            InputField(
+              type: 'biography',
+              icon: Icons.description,
+              multiline: true,
+              onSaved: (value) {
+                model.biography = value;
+              },
+            ),
             SizedBox(height: 25.0),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    debugPrint('Registering...');
+                    _formKey.currentState!.save();
+                    context.read<AuthenticationService>().signUp(
+                        model.name,
+                        model.username,
+                        model.email,
+                        model.password,
+                        model.biography);
                   }
                 },
                 child: Text('Sign up'),
@@ -64,12 +116,7 @@ class RegisterFormState extends State<RegisterForm> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
-                        ),
-                      );
+                      Navigator.pop(context);
                     },
                     child: Text('Sign in.'),
                   ),

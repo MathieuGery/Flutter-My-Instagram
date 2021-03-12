@@ -19,7 +19,7 @@ class AuthenticationService {
   }
 
   Future<String?> signUp(String name, String username, String email,
-      String password, String confirmPassword, String biography) async {
+      String password, String biography) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     QuerySnapshot usernameCheck =
         await users.where('username', isEqualTo: username).get();
