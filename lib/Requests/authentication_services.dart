@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -19,19 +20,22 @@ class AuthenticationService {
   }
 
   Future<String?> signUp(String name, String username, String email,
-      String password, String confirmPassword, String biography) async {
+      String password, String biography) async {
+    debugPrint(name + username + email + password + biography);
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
     QuerySnapshot usernameCheck =
         await users.where('username', isEqualTo: username).get();
     QuerySnapshot emailCheck =
         await users.where('email', isEqualTo: email).get();
 
-    if (usernameCheck.docs.isEmpty) {
+    if (usernameCheck.docs.isNotEmpty) {
       return ("User with this username already exists.");
     }
-    if (emailCheck.docs.isEmpty) {
+
+    if (emailCheck.docs.isNotEmpty) {
       return ("User with this email already exists.");
     }
+
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
