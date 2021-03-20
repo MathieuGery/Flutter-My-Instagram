@@ -45,7 +45,10 @@ class AuthenticationService {
         'name': name,
         'username': username,
         'email': email,
-        'biography': biography
+        'biography': biography,
+        'publicationsNumber': 0,
+        'likedPostedPicturesNumber': 0,
+        'likedPicturesNumber': 0
       }).catchError((error) => print("Failed to add user $error"));
       return "Registered in";
     } on FirebaseAuthException catch (err) {

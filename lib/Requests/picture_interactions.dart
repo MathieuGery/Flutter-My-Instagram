@@ -31,8 +31,6 @@ class PictureInteractions {
   Future<List<String>> getUserPictures(String uid) async {
     List<String> picturesLink = [];
 
-    debugPrint('salut');
-
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(uid)

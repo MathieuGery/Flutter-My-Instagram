@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 
 class UserData with ChangeNotifier {
-  String _name = 'Romain Floriani';
-  String _bio =
+  dynamic _name = 'Romain Floriani';
+  dynamic _bio =
       "Salut a tous les amis c'est David Lafarge Pokemon opening adaiofa aofafna angagiapagn oagnaogangoa agoaonga";
-  String _username = 'Nyzart';
-  int _publicationsNumber = 4;
-  int _likedPostedPicturesNumber = 0;
-  int _likedPicturesNumber = 0;
+  dynamic _username = 'Nyzart';
+  dynamic _publicationsNumber = 4;
+  dynamic _likedPostedPicturesNumber = 0;
+  dynamic _likedPicturesNumber = 0;
 
   String get name => _name;
   String get username => _username;
