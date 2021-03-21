@@ -15,11 +15,11 @@ class Profile extends StatelessWidget {
     double height = MediaQuery.of(context).size.width;
     final userID = FirebaseAuth.instance.currentUser!.uid;
 
-    onPictureTap() async {
+    onPictureTap(final picture) async {
       await Navigator.push(
         context,
         new MaterialPageRoute(
-          builder: (context) => SinglePicture(userID: 'test'),
+          builder: (context) => SinglePicture(picture),
         ),
       );
     }
@@ -138,9 +138,10 @@ class Profile extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Container(
-                    child: FutureBuilder<List<String>>(
+                    child: FutureBuilder<List<Map<String, dynamic>?>>(
                       future: PictureInteractions().getUserPictures(userID),
-                      builder: (context, AsyncSnapshot<List<String>> snapshot) {
+                      builder: (context,
+                          AsyncSnapshot<List<Map<String, dynamic>?>> snapshot) {
                         if (snapshot.hasData) {
                           return GridView.count(
                             physics: BouncingScrollPhysics(),
@@ -150,12 +151,14 @@ class Profile extends StatelessWidget {
                             children:
                                 List.generate(snapshot.data!.length, (index) {
                               return GestureDetector(
-                                onTap: onPictureTap,
+                                onTap: () =>
+                                    onPictureTap(snapshot.data![index]!),
                                 child: Container(
                                   child: FadeInImage.memoryNetwork(
                                       fit: BoxFit.fitWidth,
                                       placeholder: kTransparentImage,
-                                      image: snapshot.data![index]),
+                                      image: snapshot
+                                          .data![index]!['pictureLink']),
                                 ),
                               );
                             }),

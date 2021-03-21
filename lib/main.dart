@@ -8,9 +8,12 @@ import 'Views/login.dart';
 import 'Classes/pageContent.dart';
 import 'Classes/user.dart';
 import 'dart:async';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
 
   runApp(

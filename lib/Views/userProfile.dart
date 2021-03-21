@@ -17,11 +17,11 @@ class UserProfile extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
 
-    onPictureTap() async {
+    onPictureTap(final picture) async {
       await Navigator.push(
         context,
         new MaterialPageRoute(
-          builder: (context) => SinglePicture(userID: 'test'),
+          builder: (context) => SinglePicture(picture),
         ),
       );
     }
@@ -128,9 +128,10 @@ class UserProfile extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Container(
-              child: FutureBuilder<List<String>>(
+              child: FutureBuilder<List<Map<String, dynamic>?>>(
                 future: PictureInteractions().getUserPictures(user['id']),
-                builder: (context, AsyncSnapshot<List<String>> snapshot) {
+                builder: (context,
+                    AsyncSnapshot<List<Map<String, dynamic>?>> snapshot) {
                   if (snapshot.hasData) {
                     return GridView.count(
                       physics: BouncingScrollPhysics(),
@@ -139,12 +140,12 @@ class UserProfile extends StatelessWidget {
                       mainAxisSpacing: 1,
                       children: List.generate(snapshot.data!.length, (index) {
                         return GestureDetector(
-                          onTap: onPictureTap,
+                          onTap: () => onPictureTap(snapshot.data![index]!),
                           child: Container(
                             child: FadeInImage.memoryNetwork(
                                 fit: BoxFit.fitWidth,
                                 placeholder: kTransparentImage,
-                                image: snapshot.data![index]),
+                                image: snapshot.data![index]!['pictureLink']),
                           ),
                         );
                       }),

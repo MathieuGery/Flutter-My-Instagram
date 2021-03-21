@@ -27,11 +27,9 @@ class HomepageContent extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
 
-    onPictureTap() async {
-      await Navigator.push(
-          context,
-          new MaterialPageRoute(
-              builder: (context) => SinglePicture(userID: ('test'))));
+    onPictureTap(final picture) async {
+      await Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => SinglePicture(picture)));
     }
 
     return Scaffold(
@@ -63,7 +61,7 @@ class HomepageContent extends StatelessWidget {
                       mainAxisSpacing: 1,
                       children: List.generate(snapshot.data!.length, (index) {
                         return GestureDetector(
-                          onTap: onPictureTap,
+                          onTap: () => onPictureTap(snapshot.data![index]!),
                           child: Container(
                             child: FadeInImage.memoryNetwork(
                                 fit: BoxFit.fitWidth,

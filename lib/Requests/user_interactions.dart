@@ -16,6 +16,25 @@ class userInteract {
     return userData;
   }
 
+  Future<List<Map<String, dynamic>?>> getFavoritePictures() async {
+    List<Map<String, dynamic>?> pictures = [];
+    final userID = FirebaseAuth.instance.currentUser!.uid;
+    CollectionReference pictureRef =
+        FirebaseFirestore.instance.collection("Pictures");
+
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userID)
+        .get()
+        .then((user) async {
+      for (final pictureID in user.data()!['favorites']) {
+        final picture = await pictureRef.doc(pictureID).get();
+        if (picture.data() != null) pictures.add(picture.data());
+      }
+    });
+    return pictures;
+  }
+
   Future<List<Map<String, dynamic>?>> getHomepagePictures() async {
     CollectionReference picturesCollection =
         FirebaseFirestore.instance.collection("Pictures");
@@ -38,6 +57,7 @@ class userInteract {
             comments.add(comDoc.data());
           }
           if (docs.docs.isNotEmpty) pictureTMP!['comments'] = comments;
+          pictureTMP!['id'] = picDoc.id;
           if (documents.docs.isNotEmpty) pictures.add(pictureTMP);
         });
       }
