@@ -44,11 +44,14 @@ class userInteract {
     return pictures;
   }
 
-  Future<Map<String, dynamic>?> getUser(String username) async {
-    Map<String, dynamic>? userData;
-    await users.where('username', isEqualTo: username).get().then((value) {
+  Future<List<Map<String, dynamic>?>> getUserBySearch(String keyWord) async {
+    List<Map<String, dynamic>?> userData = [];
+    await users.where('caseSearch', arrayContains: keyWord).get().then((value) {
       if (value.docs.isEmpty) return null;
-      userData = value.docs[0].data();
+      for (final user in value.docs) {
+        user.data()?['id'] = user.id;
+        userData.add(user.data());
+      }
     });
     return (userData);
   }

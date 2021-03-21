@@ -21,7 +21,6 @@ class AuthenticationService {
 
   Future<String?> signUp(String name, String username, String email,
       String password, String biography) async {
-    debugPrint(name + username + email + password + biography);
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
     QuerySnapshot usernameCheck =
         await users.where('username', isEqualTo: username).get();
@@ -40,7 +39,13 @@ class AuthenticationService {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       final userID = FirebaseAuth.instance.currentUser!.uid;
+      List<String> caseSearch = [];
+      String search = '';
 
+      for (int i = 0; i < username.length; i++) {
+        search += username[i];
+        if (search.length > 1) caseSearch.add(search);
+      }
       await users.doc(userID).set({
         'name': name,
         'username': username,
@@ -48,7 +53,8 @@ class AuthenticationService {
         'biography': biography,
         'publicationsNumber': 0,
         'likedPostedPicturesNumber': 0,
-        'likedPicturesNumber': 0
+        'likedPicturesNumber': 0,
+        'caseSearch': caseSearch
       }).catchError((error) => print("Failed to add user $error"));
       return "Registered in";
     } on FirebaseAuthException catch (err) {

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/scaled_tile.dart';
-import 'package:flutter_instagram/Classes/user.dart';
-import 'package:flutter_instagram/Views/profile.dart';
+import 'package:flutter_instagram/Requests/user_interactions.dart';
+import 'package:flutter_instagram/Views/userProfile.dart';
 
 class Post {
   final String title;
   final String body;
+  final user;
 
-  Post(this.title, this.body);
+  Post(this.title, this.body, this.user);
 }
 
 class UserSearchBar extends StatelessWidget {
@@ -16,11 +17,12 @@ class UserSearchBar extends StatelessWidget {
   final SearchBarController<Post> _searchBarController = SearchBarController();
 
   Future<List<Post>> _getALlPosts(String text) async {
-    await Future.delayed(Duration(seconds: text.length == 4 ? 5 : 1));
+    List<Map<String, dynamic>?> users =
+        await userInteract().getUserBySearch(text);
     List<Post> posts = [];
 
-    for (int i = 0; i < 5; i++) {
-      posts.add(Post("$text $i", "Hello guys !"));
+    for (final user in users) {
+      posts.add(Post(user?['username'], user?['biography'], user));
     }
     return posts;
   }
@@ -49,19 +51,26 @@ class UserSearchBar extends StatelessWidget {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           crossAxisCount: 1,
+          minimumChars: 2,
           onItemFound: (Post post, int index) {
             return Container(
               color: Colors.black,
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: NetworkImage("https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"), // no matter how big it is, it won't overflow
+                  backgroundImage: NetworkImage(
+                      "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"), // no matter how big it is, it won't overflow
                 ),
                 title: Text(post.title, style: TextStyle(color: Colors.white)),
                 isThreeLine: true,
-                subtitle: Text(post.body,  style: TextStyle(color: Colors.grey)),
+                subtitle: Text(post.body, style: TextStyle(color: Colors.grey)),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Profile()));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => UserProfile(
+                        user: post.user,
+                      ),
+                    ),
+                  );
                 },
               ),
             );
