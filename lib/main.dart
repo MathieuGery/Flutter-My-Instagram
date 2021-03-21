@@ -5,13 +5,14 @@ import 'Requests/authentication_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Views/homepage.dart';
 import 'Views/login.dart';
-
 import 'Classes/pageContent.dart';
 import 'Classes/user.dart';
+import 'dart:async';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(
     MultiProvider(
       providers: [

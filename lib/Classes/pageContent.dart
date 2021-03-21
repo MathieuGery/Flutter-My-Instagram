@@ -7,12 +7,12 @@ import '../Views/homepage.dart';
 import '../Views/profile.dart';
 import '../Views/userSearch.dart';
 
-class PageContent with ChangeNotifier {
+class  PageContent with ChangeNotifier {
   int _currentIndex = 0;
   final List<Widget> _pageContent = [
     HomepageContent(),
     UserSearch(),
-    TakePicture(),
+    MyHomePage(),
     Favorites(),
     Profile(),
   ];
