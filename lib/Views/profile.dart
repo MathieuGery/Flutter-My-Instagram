@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/Requests/authentication_services.dart';
 import 'package:flutter_instagram/Requests/user_interactions.dart';
 
 import 'package:flutter_instagram/Views/single_picture.dart';
 import 'package:flutter_instagram/Requests/picture_interactions.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -29,8 +31,18 @@ class Profile extends StatelessWidget {
           if (snapshot.hasData) {
             return Column(
               children: [
+                AppBar(
+                  backgroundColor: Colors.black,
+                  actions: [
+                    IconButton(
+                        icon: Icon(Icons.logout),
+                        onPressed: () {
+                          context.read<AuthenticationService>().logOut();
+                        })
+                  ],
+                ),
                 SizedBox(
-                  height: height / 5,
+                  height: height / 8,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
