@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
+import 'package:flutter_instagram/Components/userProfilSearch.dart';
 import 'package:flutter_instagram/Requests/user_interactions.dart';
-import 'package:flutter_instagram/Views/userProfile.dart';
 
 class Post {
   final String title;
@@ -52,27 +52,7 @@ class UserSearchBar extends StatelessWidget {
           crossAxisCount: 1,
           minimumChars: 2,
           onItemFound: (Post post, int index) {
-            return Container(
-              color: Colors.black,
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"), // no matter how big it is, it won't overflow
-                ),
-                title: Text(post.title, style: TextStyle(color: Colors.white)),
-                isThreeLine: true,
-                subtitle: Text(post.body, style: TextStyle(color: Colors.grey)),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => UserProfile(
-                        user: post.user,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
+            return UserProfilSearch(post: post);
           },
         ),
       ),
