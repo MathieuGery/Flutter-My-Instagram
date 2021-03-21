@@ -17,7 +17,7 @@ class PictureInteractions {
         pictures.add({
           'pictureLink': value,
           'userID': uid,
-          'uploadDate': Timestamp.now(),
+          'date': Timestamp.now(),
           'likes': 0
         }).then((docRef) async {
           await FirebaseFirestore.instance.collection('Users').doc(uid).update({

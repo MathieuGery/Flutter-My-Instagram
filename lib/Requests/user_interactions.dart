@@ -27,6 +27,7 @@ class userInteract {
         .then((documents) async {
       for (QueryDocumentSnapshot picDoc in documents.docs) {
         final List<Map<String, dynamic>?> comments = [];
+        final pictureTMP = picDoc.data();
         await picturesCollection
             .doc(picDoc.id)
             .collection('Comments')
@@ -36,9 +37,9 @@ class userInteract {
           for (QueryDocumentSnapshot comDoc in docs.docs) {
             comments.add(comDoc.data());
           }
-          if (docs.docs.isNotEmpty) picDoc.data()?["comments"] = comments;
+          if (docs.docs.isNotEmpty) pictureTMP!['comments'] = comments;
+          if (documents.docs.isNotEmpty) pictures.add(pictureTMP);
         });
-        if (documents.docs.isNotEmpty) pictures.add(picDoc.data());
       }
     });
     return pictures;
@@ -49,8 +50,10 @@ class userInteract {
     await users.where('caseSearch', arrayContains: keyWord).get().then((value) {
       if (value.docs.isEmpty) return null;
       for (final user in value.docs) {
-        user.data()?['id'] = user.id;
-        userData.add(user.data());
+        final userTMP = user.data();
+        userTMP!['id'] = user.id;
+        debugPrint(userTMP['id']);
+        userData.add(userTMP);
       }
     });
     return (userData);
