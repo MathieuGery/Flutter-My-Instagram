@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 
-class MyHomePage extends StatefulWidget {
+class TakePicture extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TakePictureState createState() => _TakePictureState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TakePictureState extends State<TakePicture> {
   var _image;
   final picker = ImagePicker();
 

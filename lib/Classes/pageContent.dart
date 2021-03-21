@@ -12,7 +12,7 @@ class  PageContent with ChangeNotifier {
   final List<Widget> _pageContent = [
     HomepageContent(),
     UserSearch(),
-    MyHomePage(),
+    TakePicture(),
     Favorites(),
     Profile(),
   ];
