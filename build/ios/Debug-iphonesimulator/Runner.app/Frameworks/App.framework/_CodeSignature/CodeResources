@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES</key>
 		<data>
-		CzEUPGRFUgIwpGVx5sTvFb1TYR4=
+		BekvDTS9pj4sE1lNGuB4gKDVilc=
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -26,11 +26,11 @@
 		</data>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<data>
-		6zfESdP0IYXlP0J35jQSOHS46co=
+		cZRN7w1hu9lfK9eNH5xBwZDC8LE=
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		5FNG1IF8KrUFm1lvzv7N+VGQ2IY=
+		/K/hAVIrbD6AEB2Q655WndRHTU4=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>flutter_assets/vm_snapshot_data</key>
 		<data>
-		0MUEN8Dh2rSry6nWfhDGdTOKCK8=
+		FeAY5oXqy6KURejRkdlT8SYpRwk=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -69,11 +69,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CzEUPGRFUgIwpGVx5sTvFb1TYR4=
+			BekvDTS9pj4sE1lNGuB4gKDVilc=
 			</data>
 			<key>hash2</key>
 			<data>
-			/pfg501ZhBBu14kLFU10tPACyh1WCpYoOHdxPRwCWFc=
+			KMeiOr5C/F98c04wxXDNcTSYO58E1JoHoidbRlnn7zE=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -91,22 +91,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6zfESdP0IYXlP0J35jQSOHS46co=
+			cZRN7w1hu9lfK9eNH5xBwZDC8LE=
 			</data>
 			<key>hash2</key>
 			<data>
-			5sZArqfRy9eFSrcAGP3xnOad4PzGsk+fCJEFzkyyi10=
+			sLKlhNs0shANNA87/lGgBRHeLxBPvzr7UDSaOBwRrdA=
 			</data>
 		</dict>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5FNG1IF8KrUFm1lvzv7N+VGQ2IY=
+			/K/hAVIrbD6AEB2Q655WndRHTU4=
 			</data>
 			<key>hash2</key>
 			<data>
-			xvP9MsTVrbr09TSplvI65h4QEl9LdBujLAv7wpSkHio=
+			Pjdpt1ZgAaLCojRgsuE8AhhhLSKj18+E+NBBi2aR/nw=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -124,11 +124,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0MUEN8Dh2rSry6nWfhDGdTOKCK8=
+			FeAY5oXqy6KURejRkdlT8SYpRwk=
 			</data>
 			<key>hash2</key>
 			<data>
-			d4jztpWzsbGPMtwqWEi8vWt+bs0A7WFiTBwCYgs5SM4=
+			t3IEcbLeTiLFASobCZGh1hV+u3CnaCqJRzUL49Mcu4k=
 			</data>
 		</dict>
 	</dict>
