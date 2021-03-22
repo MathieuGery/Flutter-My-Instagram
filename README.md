@@ -13,9 +13,9 @@ flutter run --no-sound-null-safety
 
 
 ### WARNING
-
+```
 If you create an account, BE SURE to have a password that is at least 6 characters !!!!
-
+```
 
 
 This project is a starting point for a Flutter application.
