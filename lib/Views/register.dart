@@ -100,6 +100,7 @@ class RegisterFormState extends State<RegisterForm> {
                         model.email,
                         model.password,
                         model.biography);
+                    Navigator.pop(context);
                   }
                 },
                 child: Text('Sign up'),
