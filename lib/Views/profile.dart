@@ -102,8 +102,7 @@ class Profile extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          snapshot.data!['likedPostedPicturesNumber']
-                              .toString(),
+                          snapshot.data!['likedPostedPicturesNumber'].toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

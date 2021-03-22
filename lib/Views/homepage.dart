@@ -3,6 +3,7 @@ import 'package:flutter_instagram/Requests/user_interactions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_instagram/Views/single_picture.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_instagram/Components/header.dart';
 
 import '../Classes/pageContent.dart';
 import '../Classes/user.dart';
@@ -40,18 +41,7 @@ class HomepageContent extends StatelessWidget {
           if (snapshot.hasData) {
             return Column(
               children: [
-                SizedBox(
-                  height: height / 4,
-                ),
-                Center(
-                    child: Text("Actuality",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32))),
-                SizedBox(
-                  height: height / 20,
-                ),
+                Header("Actuality"),
                 Expanded(
                   child: Container(
                     child: GridView.count(

@@ -3,6 +3,7 @@ import 'package:flutter_instagram/Requests/picture_interactions.dart';
 import 'package:flutter_instagram/Requests/user_interactions.dart';
 import 'package:flutter_instagram/Views/single_picture.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_instagram/Components/header.dart';
 
 class Favorites extends StatelessWidget {
   @override
@@ -17,18 +18,7 @@ class Favorites extends StatelessWidget {
 
     return Scaffold(
       body: Column(children: [
-        SizedBox(
-          height: height / 4,
-        ),
-        Center(
-            child: Text("Favorites",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32))),
-        SizedBox(
-          height: height / 20,
-        ),
+        Header("Favorites"),
         Expanded(
           child: Container(
             child: FutureBuilder(
